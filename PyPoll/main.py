@@ -25,11 +25,11 @@ with open(csvpath, newline="") as csvfile:
         
         #count times candidates names are found and add to variable
         if row[2] == "Khan":
-            kan +=1
+            khan += 1
         elif row[2] == "Correy":
-            correy +=1
+            correy += 1
         elif row[2] == "Li":
-            li = +=1
+            li += 1
         elif row[2] == "O'Tooley":
             otooley +=1
             
@@ -39,7 +39,7 @@ votes = [khan, correy, li, otooley]
 
 # zip together and return winner
 dict_candidates_votes = dict(zip(candidates, votes))
-winner = max(dict_candidates_votes, winner=dict_candidates_votes.get)
+key = max(dict_candidates_votes, key=dict_candidates_votes.get)
 
 # find percentages of votes
 khan_percent = (khan/total_votes) *100
@@ -57,7 +57,7 @@ print(f"Correy: {correy_percent:.3f}% ({correy})")
 print(f"Li: {li_percent:.3f}% ({li})")
 print(f"O'Tooley: {otooley_percent:.3f}% ({otooley})")
 print(f"----------------------------")
-print(f"Winner: {winner}")
+print(f"Winner: {key}")
 
 # create a text file with results
 output_file = 'Analysis/financial_analysis.txt'
@@ -69,7 +69,7 @@ with open(output_file,"w", newline="") as datafile:
     csvwriter.writerow(f"Khan: {khan_percent:.3f}% ({khan})")
     csvwriter.writerow(f"Correy: {correy_percent:.3f}% ({correy})")
     csvwriter.writerow(f"Li: {li_percent:.3f}% ({li})")
-    csvwriter.writerow((f"O'Tooley: {otooley_percent:.3f}% ({otooley})")
+    csvwriter.writerow(f"O'Tooley: {otooley_percent:.3f}% ({otooley})")
     csvwriter.writerow(f"----------------------------")
-    csvwriter.writerow(f"Winner: {winner}")
+    csvwriter.writerow(f"Winner: {key}")
 
