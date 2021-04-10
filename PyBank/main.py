@@ -10,52 +10,50 @@ profit_change = []
 # load csv file
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
-with open(csvpath, newline="") as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
+with open(csvpath, newline=' ') as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=',')
     reader = csv.reader(csvfile)
-    next(reader, None)
+    next(reader, None) # skip header
     
-# add values
+# iterate through rows
     for row in reader:
-        months = row[0]
-        months.append(months)
-        values = int(row[1])
-        p.append(values)
-        
-total_months = len(months)
-net_total = sum(p)
-net_total_months = len(months) - 1
-diff_budget_data = []
-
-for i in range(len(p) - 1):
-    diff_budget_data.append(float(p[i + 1]) - float(p[i]))
-    new_net_total = sum(diff_budget_data)
     
-# sum of prof/loss
-avg_net_change = new_net_total/net_total_months
+        #append ttl months and profits to correspinding lists
+        months.append(row[0])
+        profit_total.append(int(row[1]))
+    
+    # iterate through profits to get monthly change
+    for i in range(len(profit_total)-1):
+    
+        # difference between 2 months, append to profit change
+        profit_change.append(profit_total[i+1]-profit_total[i])
 
-# greatest increase + decrease over entire period
-min_p = p[p.index(min(p))] - p[p.index(min(p))-1]
-max_p = p[p.index(max(p))] - p[p.index(max(p))-1]
+# max and min of the profit change list
+max_value = max(profit_change)
+min_value = min(profit_change)
+
+# add max and min to the right month
+max_month = profit_change.index(max(profit_change)) + 1
+min_month = profit_change.index(min(profit_change)) + 1
 
 # print results
 print("Financial Analysis")
 print("-------------------")
-print(f"Total Months: {total_months}")
-print(f"Total: ${net_total}")
-print(f"Average Change: ${round(ave_net_change,2)}")
-print(f"Greatest Increase in Profits: {months[p.index(max(p))]} (${max_p})")
-print(f"Greatest Decrease in Profits: {months[p.index(min(p))]} (${min_p})")
+print(f"Total Months: {len(months)}")
+print(f"Total: ${sum(profit_total)}")
+print(f"Average Change: ${round(sum(profit_change)/len(profit_change),2)}")
+print(f"Greatest Increase in Profits: {months[max_month]} (${(str(max_value))})")
+print(f"Greatest Decrease in Profits: {months[min_month]} (${(str(min_value))})")
 
 # create a text file with results
 output_file = 'Analysis/financial_analysis.txt'
-with open(output_file, "w", newline="") as datafile:
+with open(output_file,"w", newline=' ') as datafile:
     csvwriter = csv.writer(datafile)
     csvwriter.writerow(["Financial Analysis"])
     csvwriter.writerow(["-------------------"])
-    csvwriter.writerow([f"Total Months: {total_months}"])
-    csvwriter.writerow([f"Total: ${net_total}"])
-    csvwriter.writerow([f"Average Change: ${round(ave_net_change,2)}"])
-    csvwriter.writerow([f"Greatest Increase in Profits: {months[p.index(max(p))]} (${max_p})"])
-    csvwriter.writerow([f"Greatest Decrease in Profits: {months[p.index(min(p))]} (${min_p})"])
+    csvwriter.writerow(f"Total Months: {len(months)}")
+    csvwriter.writerow(f"Total: ${sum(profit_total)}")
+    csvwriter.writerow(f"Average Change: ${round(sum(profit_change)/len(profit_change),2)}")
+    csvwriter.writerow(f"Greatest Increase in Profits: {months[max_month]} (${(str(max_value))})")
+    csvwriter.writerow(f"Greatest Decrease in Profits: {months[min_month]} (${(str(min_value))})")
     
