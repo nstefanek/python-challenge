@@ -49,11 +49,11 @@ print(f"Greatest Decrease in Profits: {months[min_month]} (${(str(min_value))})"
 output_file = 'Analysis/financial_analysis.txt'
 with open(output_file,"w", newline="") as datafile:
     csvwriter = csv.writer(datafile)
-    csvwriter.writerow("Financial Analysis")
-    csvwriter.writerow("-------------------")
-    csvwriter.writerow(f"Total Months: {len(months)}")
-    csvwriter.writerow(f"Total: ${sum(profit_total)}")
-    csvwriter.writerow(f"Average Change: ${round(sum(profit_change)/len(profit_change),2)}")
-    csvwriter.writerow(f"Greatest Increase in Profits: {months[max_month]} (${(str(max_value))})")
-    csvwriter.writerow(f"Greatest Decrease in Profits: {months[min_month]} (${(str(min_value))})")
+    csvwriter.writerow([("Financial Analysis")])
+    csvwriter.writerow([("-------------------")])
+    csvwriter.writerow([(f"Total Months: {len(months)}")])
+    csvwriter.writerow([(f"Total: ${sum(profit_total)}")])
+    csvwriter.writerow([(f"Average Change: ${round(sum(profit_change)/len(profit_change),2)}")])
+    csvwriter.writerow([(f"Greatest Increase in Profits: {months[max_month]} (${(str(max_value))})")])
+    csvwriter.writerow([(f"Greatest Decrease in Profits: {months[min_month]} (${(str(min_value))})")])
     
