@@ -10,7 +10,7 @@ profit_change = []
 # load csv file
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
-with open(csvpath, newline=' ') as csvfile:
+with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     reader = csv.reader(csvfile)
     next(reader, None) # skip header
@@ -47,10 +47,10 @@ print(f"Greatest Decrease in Profits: {months[min_month]} (${(str(min_value))})"
 
 # create a text file with results
 output_file = 'Analysis/financial_analysis.txt'
-with open(output_file,"w", newline=' ') as datafile:
+with open(output_file,"w", newline="") as datafile:
     csvwriter = csv.writer(datafile)
-    csvwriter.writerow(["Financial Analysis"])
-    csvwriter.writerow(["-------------------"])
+    csvwriter.writerow("Financial Analysis")
+    csvwriter.writerow("-------------------")
     csvwriter.writerow(f"Total Months: {len(months)}")
     csvwriter.writerow(f"Total: ${sum(profit_total)}")
     csvwriter.writerow(f"Average Change: ${round(sum(profit_change)/len(profit_change),2)}")
