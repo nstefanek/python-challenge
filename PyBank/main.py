@@ -2,13 +2,10 @@
 import os
 import csv
 
-# define variables
+# create lists
 months = []
-prof_loss_changes = []
-net_change = []
-
-avg_net_change = 0
-total_months = 0
+profit_total = []
+profit_change = []
 
 # load csv file
 csvpath = os.path.join('Resources', 'budget_data.csv')
@@ -21,7 +18,7 @@ with open(csvpath, newline="") as csvfile:
 # add values
     for row in reader:
         months = row[0]
-        months.append(month)
+        months.append(months)
         values = int(row[1])
         p.append(values)
         
@@ -43,22 +40,22 @@ max_p = p[p.index(max(p))] - p[p.index(max(p))-1]
 
 # print results
 print("Financial Analysis")
-print("-------------------')
+print("-------------------")
 print(f"Total Months: {total_months}")
 print(f"Total: ${net_total}")
 print(f"Average Change: ${round(ave_net_change,2)}")
 print(f"Greatest Increase in Profits: {months[p.index(max(p))]} (${max_p})")
-print(f"Greatest Decrease in Profits: {months[p.index(min(p))]} ($min_p})")
+print(f"Greatest Decrease in Profits: {months[p.index(min(p))]} (${min_p})")
 
 # create a text file with results
-output_file = 'Analysis/financial_analysis.txt"
+output_file = 'Analysis/financial_analysis.txt'
 with open(output_file, "w", newline="") as datafile:
     csvwriter = csv.writer(datafile)
     csvwriter.writerow(["Financial Analysis"])
-    csvwriter.writerow(["-------------------'])
+    csvwriter.writerow(["-------------------"])
     csvwriter.writerow([f"Total Months: {total_months}"])
     csvwriter.writerow([f"Total: ${net_total}"])
     csvwriter.writerow([f"Average Change: ${round(ave_net_change,2)}"])
     csvwriter.writerow([f"Greatest Increase in Profits: {months[p.index(max(p))]} (${max_p})"])
-    csvwriter.writerow([f"Greatest Decrease in Profits: {months[p.index(min(p))]} ($min_p})"])
+    csvwriter.writerow([f"Greatest Decrease in Profits: {months[p.index(min(p))]} (${min_p})"])
     
